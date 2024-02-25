@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/data/dummy_data.dart';
-import 'package:meal_app/models/category.dart';
 import 'package:meal_app/widgets/category_grid_item.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -32,7 +31,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             crossAxisSpacing: 20,
             mainAxisSpacing: 20),
         children: [
-          for (Category cat in availableCategories)
+          for (final cat in availableCategories)
             CategoryGridItem(
               category: cat,
             )
