@@ -65,8 +65,7 @@ const dummyMeals = [
     title: 'Spaghetti with Tomato Sauce',
     affordability: Affordability.affordable,
     complexity: Complexity.simple,
-    imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg',
+    imageUrl: 'https://imageup.ru/img43/4749725/spaghetti_bolognese.jpg',
     duration: 20,
     ingredients: [
       '4 Tomatoes',
@@ -98,8 +97,7 @@ const dummyMeals = [
     title: 'Toast Hawaii',
     affordability: Affordability.affordable,
     complexity: Complexity.simple,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
+    imageUrl: 'https://imageup.ru/img179/4749726/toast.jpg',
     duration: 10,
     ingredients: [
       '1 Slice White Bread',
@@ -127,8 +125,7 @@ const dummyMeals = [
     title: 'Classic Hamburger',
     affordability: Affordability.pricey,
     complexity: Complexity.simple,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2014/10/23/18/05/burger-500054_1280.jpg',
+    imageUrl: 'https://imageup.ru/img251/4749716/burger.jpg',
     duration: 45,
     ingredients: [
       '300g Cattle Hack',
@@ -158,8 +155,7 @@ const dummyMeals = [
     title: 'Wiener Schnitzel',
     affordability: Affordability.luxurious,
     complexity: Complexity.challenging,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg',
+    imageUrl: 'https://imageup.ru/img19/4749721/schnitzel.jpg',
     duration: 60,
     ingredients: [
       '8 Veal Cutlets',
@@ -195,8 +191,7 @@ const dummyMeals = [
     title: 'Salad with Smoked Salmon',
     affordability: Affordability.luxurious,
     complexity: Complexity.simple,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2016/10/25/13/29/smoked-salmon-salad-1768890_1280.jpg',
+    imageUrl: 'https://imageup.ru/img108/4749722/smoked-salmon-salad.jpg',
     duration: 15,
     ingredients: [
       'Arugula',
@@ -230,8 +225,7 @@ const dummyMeals = [
     title: 'Delicious Orange Mousse',
     affordability: Affordability.affordable,
     complexity: Complexity.hard,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg',
+    imageUrl: 'https://imageup.ru/img232/4749720/pastry.jpg',
     duration: 240,
     ingredients: [
       '4 Sheets of Gelatine',
@@ -265,8 +259,7 @@ const dummyMeals = [
     title: 'Pancakes',
     affordability: Affordability.affordable,
     complexity: Complexity.simple,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653_1280.jpg',
+    imageUrl: 'https://imageup.ru/img162/4749719/pancake.jpg',
     duration: 20,
     ingredients: [
       '1 1/2 Cups all-purpose Flour',
@@ -296,8 +289,7 @@ const dummyMeals = [
     title: 'Creamy Indian Chicken Curry',
     affordability: Affordability.pricey,
     complexity: Complexity.challenging,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2018/06/18/16/05/indian-food-3482749_1280.jpg',
+    imageUrl: 'https://imageup.ru/img101/4749717/indian-food.jpg',
     duration: 35,
     ingredients: [
       '4 Chicken Breasts',
@@ -329,8 +321,7 @@ const dummyMeals = [
     title: 'Chocolate Souffle',
     affordability: Affordability.affordable,
     complexity: Complexity.hard,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2014/08/07/21/07/souffle-412785_1280.jpg',
+    imageUrl: 'https://imageup.ru/img81/4749723/souffle.jpg',
     duration: 45,
     ingredients: [
       '1 Teaspoon melted Butter',
@@ -380,8 +371,7 @@ const dummyMeals = [
     title: 'Asparagus Salad with Cherry Tomatoes',
     affordability: Affordability.luxurious,
     complexity: Complexity.simple,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2018/04/09/18/26/asparagus-3304997_1280.jpg',
+    imageUrl: 'https://imageup.ru/img109/4749709/asparagus.jpg',
     duration: 30,
     ingredients: [
       'White and Green Asparagus',

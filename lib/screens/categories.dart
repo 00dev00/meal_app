@@ -18,8 +18,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     const double catPadding = 10;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pick your category'),
+        title: const Text('Categories'),
       ),
+      drawer: const Drawer(),
       body: GridView(
         padding: const EdgeInsets.only(
           left: catPadding,
