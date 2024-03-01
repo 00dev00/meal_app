@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/data/dummy_data.dart';
-import 'package:meal_app/widgets/category_grid_item.dart';
+import 'package:meal_app/widgets/category_item.dart';
 
-class CategoriesScreen extends StatefulWidget {
+class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
-
-  @override
-  State<CategoriesScreen> createState() => _CategoriesScreenState();
-}
-
-class _CategoriesScreenState extends State<CategoriesScreen> {
-  final int crossAxisCount = 2;
-  int numberOfRows = 3;
 
   @override
   Widget build(BuildContext context) {
     const double catPadding = 10;
+    const double minItemWidth = 150;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Categories'),
@@ -26,8 +20,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           left: catPadding,
           right: catPadding,
         ),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: MediaQuery.of(context).size.width ~/ minItemWidth,
             childAspectRatio: 5 / 2,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20),
