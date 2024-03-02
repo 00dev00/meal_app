@@ -14,11 +14,14 @@ class MealItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cardHeight = constraints.maxHeight / 3;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 15.0),
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        child: Material(
+      child: SizedBox(
+        height: cardHeight,
+        child: Card(
+          clipBehavior: Clip.antiAlias,
           child: GestureDetector(
             onTap: () {
               debugPrint("You've chosen ${meal.title}");
@@ -30,28 +33,27 @@ class MealItem extends StatelessWidget {
                   placeholder: "assets/images/tomato.gif",
                   imageErrorBuilder: (context, error, stackTrace) {
                     return Image.asset(
-                      fit: BoxFit.cover,
                       width: double.infinity,
-                      height: constraints.maxHeight / 3,
+                      fit: BoxFit.cover,
                       "assets/images/no_meal.png",
                     );
+                    //return const Placeholder();
                   },
                   fit: BoxFit.cover,
                   width: double.infinity,
-                  height: constraints.maxHeight / 3,
                 ),
                 Positioned(
                   bottom: 0,
                   left: 0,
                   right: 0,
                   child: Container(
-                    width: constraints.maxWidth,
-                    height: constraints.maxHeight / 8,
+                    height:
+                        cardHeight > 200 ? cardHeight * 1 / 4 : cardHeight / 2,
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.6),
                     ),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
                           meal.title,
@@ -64,9 +66,6 @@ class MealItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: _getReceiptDetails(context, meal),
                         ),
-                        // const SizedBox(
-                        //   height: 5,
-                        // )
                       ],
                     ),
                   ),
