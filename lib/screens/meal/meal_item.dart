@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/screens/meal/meal_item_details.dart';
+import 'package:meal_app/widgets/meal_image.dart';
 
 class MealItem extends StatelessWidget {
   const MealItem(
@@ -24,25 +26,19 @@ class MealItem extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           child: GestureDetector(
             onTap: () {
-              debugPrint("You've chosen ${meal.title}");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MealItemDetails(
+                      meal,
+                    ),
+                  ));
             },
             child: Stack(
               children: [
-                FadeInImage.assetNetwork(
-                  image: meal.imageUrl,
-                  placeholder: "assets/images/tomato.gif",
-                  imageErrorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      "assets/images/no_meal.png",
-                    );
-                    //return const Placeholder();
-                  },
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                ),
+                MealImage(meal),
                 Positioned(
+                  top: cardHeight * 2 / 3,
                   bottom: 0,
                   left: 0,
                   right: 0,
@@ -57,6 +53,7 @@ class MealItem extends StatelessWidget {
                       children: [
                         Text(
                           meal.title,
+                          overflow: TextOverflow.ellipsis,
                           style:
                               Theme.of(context).textTheme.titleMedium!.copyWith(
                                     color: Colors.white,

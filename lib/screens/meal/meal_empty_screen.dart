@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class NoMeal extends StatelessWidget {
-  const NoMeal({
+class MealEmptyScreen extends StatelessWidget {
+  const MealEmptyScreen({
     super.key,
   });
 

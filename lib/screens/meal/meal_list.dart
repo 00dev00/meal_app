@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/screens/meal/meal_item.dart';
-import 'no_meal.dart';
+import 'meal_empty_screen.dart';
 
 class MealsScreen extends StatelessWidget {
   const MealsScreen({super.key, required this.title, required this.meals});
@@ -35,7 +35,7 @@ class MealsScreen extends StatelessWidget {
                           )),
                     ),
             )
-          : const NoMeal(),
+          : const MealEmptyScreen(),
     );
   }
 }
