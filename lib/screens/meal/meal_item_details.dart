@@ -9,23 +9,30 @@ class MealItemDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainTextStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(
-          color: Colors.white70,
-        );
-    final lineHeight = mainTextStyle.height! * mainTextStyle.fontSize!;
+    Widget getStepsList() {
+      return _getDetailsText(meal.steps, context);
+    }
+
+    Widget getIngredientsList() {
+      return _getDetailsText(meal.ingredients, context);
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              meal.title,
-            ),
-            const Icon(
-              Icons.star,
-            )
-          ],
+        title: FittedBox(
+          child: Row(
+            children: [
+              Text(
+                meal.title,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Icon(
+                  Icons.star_border_outlined,
+                ),
+              )
+            ],
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -49,20 +56,7 @@ class MealItemDetails extends StatelessWidget {
                 color: Colors.deepOrangeAccent,
               ),
             ),
-            LimitedBox(
-              maxHeight: lineHeight * meal.ingredients.length +
-                  20, // IntrinsicHeight is more reasonable way?
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    for (final ingredient in meal.ingredients)
-                      Text(
-                        ingredient,
-                        style: mainTextStyle,
-                      )
-                  ]),
-            ),
+            getIngredientsList(),
             const Text(
               "Steps",
               style: TextStyle(
@@ -70,25 +64,35 @@ class MealItemDetails extends StatelessWidget {
                 color: Colors.deepOrangeAccent,
               ),
             ),
-            LimitedBox(
-              maxHeight: lineHeight * meal.steps.length * 2, // same as above
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    for (final step in meal.steps)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          step,
-                          style: mainTextStyle,
-                        ),
-                      )
-                  ]),
-            ),
+            getStepsList()
           ],
         ),
+      ),
+    );
+  }
+
+  Padding _getDetailsText(List<String> rows, BuildContext context) {
+    final mainTextStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(
+          color: Colors.white70,
+        );
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10.0,
+        horizontal: 10,
+      ),
+      child: IntrinsicHeight(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              for (final row in rows)
+                Text(
+                  textAlign: TextAlign.center,
+                  row,
+                  style: mainTextStyle,
+                )
+            ]),
       ),
     );
   }

@@ -11,9 +11,10 @@ class MealImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: meal.imageUrl,
-      progressIndicatorBuilder: (context, url, downloadProgress) =>
-          CircularProgressIndicator.adaptive(
-        value: downloadProgress.progress,
+      progressIndicatorBuilder: (context, url, downloadProgress) => FittedBox(
+        child: CircularProgressIndicator.adaptive(
+          value: downloadProgress.progress,
+        ),
       ),
       errorWidget: (context, url, error) => Image.asset(
         width: double.infinity,
