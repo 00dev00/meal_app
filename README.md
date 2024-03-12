@@ -1,4 +1,4 @@
-# meal_app
+# Meal app
 
 Choose your favourite meal
 
