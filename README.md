@@ -1,6 +1,6 @@
 # meal_app
 
-Choose your favourite meal
+Choose your Favorite meal
 
 ## Getting Started
 

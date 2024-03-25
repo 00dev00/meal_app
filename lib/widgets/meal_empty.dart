@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class MealEmptyScreen extends StatelessWidget {
   const MealEmptyScreen({
     super.key,
+    this.supplementaryText,
   });
+
+  final String? supplementaryText;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class MealEmptyScreen extends StatelessWidget {
             ),
           ),
           Text(
-            "Try selecting a different category!",
+            supplementaryText ?? "Try selecting a different category!",
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium!

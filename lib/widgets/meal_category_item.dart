@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_app/data/dummy_data.dart';
 import 'package:meal_app/models/category.dart';
 import 'package:meal_app/models/meal.dart';
-import 'package:meal_app/screens/meal/meal_list.dart';
+import 'package:meal_app/screens/meal_list.dart';
 
 class CategoryGridItem extends StatelessWidget {
   const CategoryGridItem({
@@ -20,9 +20,13 @@ class CategoryGridItem extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => MealsScreen(
-          title: category.title,
-          meals: selectedMeals,
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: Text(category.title),
+          ),
+          body: MealListScreen(
+            meals: selectedMeals,
+          ),
         ),
       ),
     );

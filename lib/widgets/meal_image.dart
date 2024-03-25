@@ -18,10 +18,12 @@ class MealImage extends StatelessWidget {
       ),
       errorWidget: (context, url, error) => Image.asset(
         width: double.infinity,
+        height: double.infinity,
         fit: BoxFit.cover,
         "assets/images/no_meal.png",
       ),
       fit: BoxFit.cover,
+      height: double.infinity,
       width: double.infinity,
     );
   }
