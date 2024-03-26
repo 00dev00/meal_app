@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/data/dummy_data.dart';
-import 'package:meal_app/models/category.dart';
-import 'package:meal_app/models/meal.dart';
-import 'package:meal_app/screens/meal_list.dart';
+import 'package:meal_app/models/category_model.dart';
+import 'package:meal_app/providers/filters_provider.dart';
+import 'package:meal_app/screens/meal_list_screen.dart';
+import 'package:meal_app/services/meal_service.dart';
+import 'package:provider/provider.dart';
 
-class CategoryGridItem extends StatelessWidget {
-  const CategoryGridItem({
+class CategoryItem extends StatelessWidget {
+  const CategoryItem({
     required this.category,
     super.key,
   });
   final Category category;
 
   void _selectCategory(BuildContext context) {
-    var selectedMeals = dummyMeals
-        .where(
-          (Meal meal) => meal.categories.contains(category.id),
-        )
-        .toList();
+    final filtersProvider = context.read<FiltersProvider>();
+    final mealService = MealService(filtersProvider);
+
+    var selectedMeals = mealService.getMealByCategory(category);
+
     Navigator.push(
       context,
       MaterialPageRoute(

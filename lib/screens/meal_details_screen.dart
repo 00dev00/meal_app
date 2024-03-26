@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/meal.dart';
-import 'package:meal_app/providers/meal_favorites.dart';
+import 'package:meal_app/models/meal_model.dart';
+import 'package:meal_app/providers/favorites_provider.dart';
 import 'package:meal_app/widgets/meal_image.dart';
 import 'package:provider/provider.dart';
 
-class MealItemDetails extends StatefulWidget {
+class MealDetailsScreen extends StatefulWidget {
   final Meal meal;
 
-  const MealItemDetails(
+  const MealDetailsScreen(
     this.meal, {
     super.key,
   });
 
   @override
-  State<MealItemDetails> createState() => _MealItemDetailsState();
+  State<MealDetailsScreen> createState() => _MealDetailsScreenState();
 }
 
-class _MealItemDetailsState extends State<MealItemDetails> {
+class _MealDetailsScreenState extends State<MealDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     const headingTextStyle = TextStyle(
@@ -35,7 +35,7 @@ class _MealItemDetailsState extends State<MealItemDetails> {
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: ListenableBuilder(
-                  listenable: context.read<FavoriteMealProvider>(),
+                  listenable: context.read<FavoritesProvider>(),
                   builder: (context, child) => GestureDetector(
                     onTap: () => _toggleFavorite(
                       context,
@@ -56,7 +56,7 @@ class _MealItemDetailsState extends State<MealItemDetails> {
         child: Column(
           children: [
             AspectRatio(
-              aspectRatio: 16 / 9,
+              aspectRatio: 4 / 3,
               child: Padding(
                 padding: const EdgeInsets.only(
                   bottom: 15,
@@ -109,7 +109,7 @@ class _MealItemDetailsState extends State<MealItemDetails> {
   }
 
   Icon _getFavoriteIcon(BuildContext context, Meal meal) {
-    var isFavorite = context.read<FavoriteMealProvider>().isFavoriteMeal(meal);
+    var isFavorite = context.read<FavoritesProvider>().isFavoriteMeal(meal);
 
     return isFavorite
         ? const Icon(Icons.star)
@@ -125,7 +125,7 @@ class _MealItemDetailsState extends State<MealItemDetails> {
   }
 
   void _toggleFavorite(BuildContext context, Meal meal) {
-    var favoriteMealProvider = context.read<FavoriteMealProvider>();
+    var favoriteMealProvider = context.read<FavoritesProvider>();
     var isFavorite = favoriteMealProvider.isFavoriteMeal(meal);
     SnackBar snackBar;
 

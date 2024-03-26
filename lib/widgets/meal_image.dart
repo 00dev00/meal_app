@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/models/meal_model.dart';
 
 class MealImage extends StatelessWidget {
   const MealImage(this.meal, {super.key});
@@ -19,10 +19,10 @@ class MealImage extends StatelessWidget {
       errorWidget: (context, url, error) => Image.asset(
         width: double.infinity,
         height: double.infinity,
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
         "assets/images/no_meal.png",
       ),
-      fit: BoxFit.cover,
+      fit: BoxFit.fill,
       height: double.infinity,
       width: double.infinity,
     );

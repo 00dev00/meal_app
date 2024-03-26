@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/models/meal_model.dart';
 import 'package:meal_app/widgets/meal_image.dart';
 
 class MealItem extends StatefulWidget {
@@ -35,8 +35,6 @@ class _MealItemState extends State<MealItem> {
                 left: 0,
                 right: 0,
                 child: Container(
-                  height:
-                      cardHeight > 200 ? cardHeight * 1 / 4 : cardHeight / 2,
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.6),
                   ),

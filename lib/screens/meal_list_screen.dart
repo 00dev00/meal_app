@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/meal.dart';
-import 'package:meal_app/screens/meal_item_details.dart';
+import 'package:meal_app/models/meal_model.dart';
+import 'package:meal_app/screens/meal_details_screen.dart';
 import 'package:meal_app/widgets/meal_item.dart';
-import '../widgets/meal_empty.dart';
+import 'empty_screen.dart';
 
 class MealListScreen extends StatefulWidget {
   const MealListScreen({
@@ -27,7 +27,7 @@ class _MealListScreenState extends State<MealListScreen> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MealItemDetails(
+                      builder: (context) => MealDetailsScreen(
                         widget.meals[index],
                       ),
                     ),

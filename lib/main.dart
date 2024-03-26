@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meal_app/providers/meal_favorites.dart';
-import 'package:meal_app/providers/meal_filters.dart';
-import 'package:meal_app/screens/home.dart';
+import 'package:meal_app/providers/favorites_provider.dart';
+import 'package:meal_app/providers/filters_provider.dart';
+import 'package:meal_app/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 final ThemeData theme = ThemeData(
@@ -24,11 +24,11 @@ class MealApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<FavoriteMealProvider>(
-          create: (context) => FavoriteMealProvider(),
+        ChangeNotifierProvider<FavoritesProvider>(
+          create: (context) => FavoritesProvider(),
         ),
-        ChangeNotifierProvider<MealFiltersProvider>(
-          create: (context) => MealFiltersProvider(),
+        ChangeNotifierProvider<FiltersProvider>(
+          create: (context) => FiltersProvider(),
         ),
       ],
       builder: (context, child) => MaterialApp(

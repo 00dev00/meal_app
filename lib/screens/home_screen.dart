@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/screens/meal_category_list.dart';
+import 'package:meal_app/screens/categories_screen.dart';
 import 'package:meal_app/widgets/left_menu.dart';
-import 'package:meal_app/widgets/meal_favorites.dart';
+import 'package:meal_app/screens/favorites_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -60,8 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           });
           return const TabBarView(children: [
-            MealCategoriesScreen(),
-            FavoriteMealsScreen(),
+            CategoriesScreen(),
+            FavoritesScreen(),
           ]);
         }),
       ),

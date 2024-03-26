@@ -1,14 +1,14 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/models/meal_model.dart';
 
-class FavoriteMealProvider extends ChangeNotifier {
+class FavoritesProvider extends ChangeNotifier {
   final List<Meal> _favoriteMeal = [];
 
   late final UnmodifiableListView<Meal> favoriteMeal;
 
-  FavoriteMealProvider() {
+  FavoritesProvider() {
     favoriteMeal = UnmodifiableListView(_favoriteMeal);
   }
 

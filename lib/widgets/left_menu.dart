@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/widgets/meal_all.dart';
+import 'package:meal_app/screens/filters_screen.dart';
+import 'package:meal_app/screens/all_meals_screen.dart';
 
 class LeftMenu extends StatelessWidget {
   const LeftMenu({super.key});
@@ -15,11 +16,12 @@ class LeftMenu extends StatelessWidget {
       tilePadding: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
-      onDestinationSelected: (value) {
+      onDestinationSelected: (index) {
         Scaffold.of(context).closeDrawer();
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (BuildContext context) => const AllMealsScreen(),
+            builder: (BuildContext context) =>
+                index == 0 ? const AllMealsScreen() : const FiltersScreen(),
           ),
         );
       },
