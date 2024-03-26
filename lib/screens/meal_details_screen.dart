@@ -24,6 +24,8 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
       color: Colors.deepOrangeAccent,
     );
 
+    var provider = context.watch<FavoritesProvider>();
+
     return Scaffold(
       appBar: AppBar(
         title: FittedBox(
@@ -34,17 +36,14 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10),
-                child: ListenableBuilder(
-                  listenable: context.read<FavoritesProvider>(),
-                  builder: (context, child) => GestureDetector(
-                    onTap: () => _toggleFavorite(
-                      context,
-                      widget.meal,
-                    ),
-                    child: _getFavoriteIcon(
-                      context,
-                      widget.meal,
-                    ),
+                child: GestureDetector(
+                  onTap: () => _toggleFavorite(
+                    provider,
+                    widget.meal,
+                  ),
+                  child: _getFavoriteIcon(
+                    provider,
+                    widget.meal,
                   ),
                 ),
               )
@@ -108,8 +107,8 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     );
   }
 
-  Icon _getFavoriteIcon(BuildContext context, Meal meal) {
-    var isFavorite = context.read<FavoritesProvider>().isFavoriteMeal(meal);
+  Icon _getFavoriteIcon(FavoritesProvider provider, Meal meal) {
+    var isFavorite = provider.isFavoriteMeal(meal);
 
     return isFavorite
         ? const Icon(Icons.star)
@@ -124,16 +123,15 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     return _getDetailsText(widget.meal.ingredients, context);
   }
 
-  void _toggleFavorite(BuildContext context, Meal meal) {
-    var favoriteMealProvider = context.read<FavoritesProvider>();
-    var isFavorite = favoriteMealProvider.isFavoriteMeal(meal);
+  void _toggleFavorite(FavoritesProvider provider, Meal meal) {
+    var isFavorite = provider.isFavoriteMeal(meal);
     SnackBar snackBar;
 
     if (isFavorite) {
-      favoriteMealProvider.removeMeal(meal);
+      provider.removeMeal(meal);
       snackBar = const SnackBar(content: Text("Removed from favorites"));
     } else {
-      favoriteMealProvider.addMeal(meal);
+      provider.addMeal(meal);
       snackBar = const SnackBar(content: Text("Marked as favorite"));
     }
 
