@@ -10,9 +10,9 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filtersProvider = context.read<FiltersProvider>();
+    final filtersProvider = context.watch<FiltersProvider>();
     final mealService = MealService(filtersProvider,
-        favoritesProvider: context.watch<FavoritesProvider>());
+        favoritesProvider: context.read<FavoritesProvider>());
 
     return MealListScreen(
       meals: mealService.getFavoriteMeal(),
