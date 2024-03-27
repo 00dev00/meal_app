@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/meal_model.dart';
+import 'package:meal_app/models/meal.dart';
 
 class MealImage extends StatelessWidget {
   const MealImage(this.meal, {super.key});

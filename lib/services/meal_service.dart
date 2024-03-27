@@ -1,12 +1,12 @@
 import 'package:meal_app/data/dummy_data.dart';
-import 'package:meal_app/models/category_model.dart';
-import 'package:meal_app/models/meal_model.dart';
-import 'package:meal_app/providers/favorites_provider.dart';
-import 'package:meal_app/providers/filters_provider.dart';
+import 'package:meal_app/models/meal_category.dart';
+import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/providers/meal_favorites.dart';
+import 'package:meal_app/providers/meal_filters.dart';
 
 class MealService {
-  final FiltersProvider filtersProvider;
-  final FavoritesProvider? favoritesProvider;
+  final MealFiltersProvider filtersProvider;
+  final MealFavoritesProvider? favoritesProvider;
 
   MealService(this.filtersProvider, {this.favoritesProvider});
 
@@ -20,7 +20,7 @@ class MealService {
     return _applyActiveFilters(dummyMeals, activeFilters);
   }
 
-  List<Meal> getMealByCategory(Category category) {
+  List<Meal> getMealByCategory(MealCategory category) {
     var meals = getMeal();
 
     return meals

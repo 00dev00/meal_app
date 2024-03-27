@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-final class FiltersProvider extends ChangeNotifier {
+final class MealFiltersProvider extends ChangeNotifier {
   bool _isGlutenFree = false;
   bool _isLactoseFree = false;
   bool _isVegetarian = false;

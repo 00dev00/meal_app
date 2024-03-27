@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/meal_model.dart';
-import 'package:meal_app/providers/favorites_provider.dart';
+import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/providers/meal_favorites.dart';
 import 'package:meal_app/widgets/meal_image.dart';
 import 'package:provider/provider.dart';
 
@@ -24,32 +24,26 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
       color: Colors.deepOrangeAccent,
     );
 
-    var provider = context.watch<FavoritesProvider>();
+    var provider = context.watch<MealFavoritesProvider>();
 
     return Scaffold(
       appBar: AppBar(
-        title: FittedBox(
-          child: Row(
-            children: [
-              Text(
-                widget.meal.title,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: GestureDetector(
-                  onTap: () => _toggleFavorite(
-                    provider,
-                    widget.meal,
-                  ),
-                  child: _getFavoriteIcon(
-                    provider,
-                    widget.meal,
-                  ),
-                ),
-              )
-            ],
-          ),
+        title: Text(
+          widget.meal.title,
+          overflow: TextOverflow.ellipsis,
         ),
+        actions: [
+          IconButton(
+            onPressed: () => _toggleFavorite(
+              provider,
+              widget.meal,
+            ),
+            icon: _getFavoriteIcon(
+              provider,
+              widget.meal,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -107,7 +101,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     );
   }
 
-  Icon _getFavoriteIcon(FavoritesProvider provider, Meal meal) {
+  Icon _getFavoriteIcon(MealFavoritesProvider provider, Meal meal) {
     var isFavorite = provider.isFavoriteMeal(meal);
 
     return isFavorite
@@ -123,7 +117,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     return _getDetailsText(widget.meal.ingredients, context);
   }
 
-  void _toggleFavorite(FavoritesProvider provider, Meal meal) {
+  void _toggleFavorite(MealFavoritesProvider provider, Meal meal) {
     var isFavorite = provider.isFavoriteMeal(meal);
     SnackBar snackBar;
 
@@ -135,6 +129,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
       snackBar = const SnackBar(content: Text("Marked as favorite"));
     }
 
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/providers/filters_provider.dart';
+import 'package:meal_app/providers/meal_filters.dart';
 import 'package:provider/provider.dart';
 
-class FiltersScreen extends StatelessWidget {
-  const FiltersScreen({super.key});
+class MealFiltersScreen extends StatelessWidget {
+  const MealFiltersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var provider = context.watch<FiltersProvider>();
+    var provider = context.watch<MealFiltersProvider>();
 
     return Scaffold(
       appBar: AppBar(

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/category_model.dart';
-import 'package:meal_app/providers/filters_provider.dart';
-import 'package:meal_app/screens/meal_list_screen.dart';
+import 'package:meal_app/models/meal_category.dart';
+import 'package:meal_app/providers/meal_filters.dart';
+import 'package:meal_app/widgets/meal_list.dart';
 import 'package:meal_app/services/meal_service.dart';
 import 'package:provider/provider.dart';
 
-class CategoryItem extends StatelessWidget {
-  const CategoryItem({
+class MealCategoryItem extends StatelessWidget {
+  const MealCategoryItem({
     required this.category,
     super.key,
   });
-  final Category category;
+  final MealCategory category;
 
   void _selectCategory(BuildContext context) {
-    final filtersProvider = context.read<FiltersProvider>();
+    final filtersProvider = context.read<MealFiltersProvider>();
     final mealService = MealService(filtersProvider);
 
     var selectedMeals = mealService.getMealByCategory(category);
@@ -25,7 +25,7 @@ class CategoryItem extends StatelessWidget {
           appBar: AppBar(
             title: Text(category.title),
           ),
-          body: MealListScreen(
+          body: MealList(
             meals: selectedMeals,
           ),
         ),

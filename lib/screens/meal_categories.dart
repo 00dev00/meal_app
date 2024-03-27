@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/data/dummy_data.dart';
-import 'package:meal_app/widgets/category_item.dart';
+import 'package:meal_app/widgets/meal_category_item.dart';
 
-class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+class MealCategoriesScreen extends StatelessWidget {
+  const MealCategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CategoriesScreen extends StatelessWidget {
       ),
       children: [
         for (final cat in availableCategories)
-          CategoryItem(
+          MealCategoryItem(
             category: cat,
           )
       ],

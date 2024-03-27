@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meal_app/models/meal_model.dart';
+import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/widgets/meal_image.dart';
 
 class MealItem extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/providers/filters_provider.dart';
-import 'package:meal_app/screens/meal_list_screen.dart';
+import 'package:meal_app/providers/meal_filters.dart';
+import 'package:meal_app/widgets/meal_list.dart';
 import 'package:meal_app/services/meal_service.dart';
 import 'package:provider/provider.dart';
 
@@ -9,14 +9,14 @@ class AllMealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var filtersProvider = context.read<FiltersProvider>();
+    var filtersProvider = context.read<MealFiltersProvider>();
     var mealService = MealService(filtersProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Menu"),
       ),
-      body: MealListScreen(
+      body: MealList(
         meals: mealService.getMeal(),
         missingDataText: "It's so empty here (:",
       ),

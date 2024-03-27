@@ -1,54 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/category_model.dart';
-import 'package:meal_app/models/meal_model.dart';
+import 'package:meal_app/models/meal_category.dart';
+import 'package:meal_app/models/meal.dart';
 
 const availableCategories = [
-  Category(
+  MealCategory(
     id: 'c1',
     title: 'Italian',
     color: Colors.purple,
   ),
-  Category(
+  MealCategory(
     id: 'c2',
     title: 'Quick & Easy',
     color: Colors.red,
   ),
-  Category(
+  MealCategory(
     id: 'c3',
     title: 'Hamburgers',
     color: Colors.orange,
   ),
-  Category(
+  MealCategory(
     id: 'c4',
     title: 'German',
     color: Colors.amber,
   ),
-  Category(
+  MealCategory(
     id: 'c5',
     title: 'Light & Lovely',
     color: Colors.blue,
   ),
-  Category(
+  MealCategory(
     id: 'c6',
     title: 'Exotic',
     color: Colors.green,
   ),
-  Category(
+  MealCategory(
     id: 'c7',
     title: 'Breakfast',
     color: Colors.lightBlue,
   ),
-  Category(
+  MealCategory(
     id: 'c8',
     title: 'Asian',
     color: Colors.lightGreen,
   ),
-  Category(
+  MealCategory(
     id: 'c9',
     title: 'French',
     color: Colors.pink,
   ),
-  Category(
+  MealCategory(
     id: 'c10',
     title: 'Summer',
     color: Colors.teal,
