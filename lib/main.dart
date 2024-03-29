@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:meal_app/navigation/routes.dart';
 import 'package:meal_app/providers/meal_favorites.dart';
 import 'package:meal_app/providers/meal_filters.dart';
-import 'package:meal_app/screens/home.dart';
 import 'package:provider/provider.dart';
 
 final ThemeData theme = ThemeData(
@@ -31,11 +31,11 @@ class MealApp extends StatelessWidget {
           create: (context) => MealFiltersProvider(),
         ),
       ],
-      builder: (context, child) => MaterialApp(
+      builder: (context, child) => MaterialApp.router(
+        routerConfig: appRouter,
         debugShowCheckedModeBanner: false,
         title: 'Meal App',
         theme: theme,
-        home: const HomeScreen(),
       ),
     );
   }

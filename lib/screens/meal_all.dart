@@ -17,7 +17,7 @@ class AllMealsScreen extends StatelessWidget {
         title: const Text("Menu"),
       ),
       body: MealList(
-        meals: mealService.getMeal(),
+        meals: mealService.getMeals(),
         missingDataText: "It's so empty here (:",
       ),
     );

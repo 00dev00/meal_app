@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/screens/meal_categories.dart';
-import 'package:meal_app/screens/meal_favorites.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meal_app/widgets/left_menu.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var currentIndex = 0;
-  var appBarTitle = "Categories";
+  final ValueNotifier<String> appBarTitleListenable =
+      ValueNotifier<String>("Categories");
+
+  final ValueNotifier<int> currentIndexListenbable = ValueNotifier<int>(0);
 
   final destinations = const [
     NavigationDestination(
@@ -32,20 +38,25 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       bottomNavigationBar: NavigationBar(
           destinations: destinations,
-          selectedIndex: currentIndex,
+          selectedIndex: currentIndexListenbable.value,
           onDestinationSelected: (index) {
-            setState(() {
-              currentIndex = index;
-              appBarTitle = index == 0 ? "Categories" : "Your Favorites";
-            });
+            currentIndexListenbable.value = index;
+
+            if (index == 0) {
+              appBarTitleListenable.value = "Categories";
+              context.go("/categories");
+            } else {
+              appBarTitleListenable.value = "Your Favorites";
+              context.go("/favorites");
+            }
           }),
       appBar: AppBar(
-        title: Text(appBarTitle),
+        title: Text(
+          appBarTitleListenable.value,
+        ),
       ),
       drawer: const LeftMenu(),
-      body: currentIndex == 0
-          ? const MealCategoriesScreen()
-          : const MealFavoritesScreen(),
+      body: widget.child,
     );
   }
 }

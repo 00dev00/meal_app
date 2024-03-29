@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/providers/meal_favorites.dart';
+import 'package:meal_app/providers/meal_filters.dart';
+import 'package:meal_app/services/meal_service.dart';
 import 'package:meal_app/widgets/meal_image.dart';
 import 'package:provider/provider.dart';
 
 class MealDetailsScreen extends StatefulWidget {
-  final Meal meal;
+  final String mealId;
 
   const MealDetailsScreen(
-    this.meal, {
+    this.mealId, {
     super.key,
   });
 
@@ -19,6 +21,9 @@ class MealDetailsScreen extends StatefulWidget {
 class _MealDetailsScreenState extends State<MealDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    var filtersProvider = context.read<MealFiltersProvider>();
+    var meal = MealService(filtersProvider).getMeal(widget.mealId);
+
     const headingTextStyle = TextStyle(
       fontSize: 20,
       color: Colors.deepOrangeAccent,
@@ -29,18 +34,18 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.meal.title,
+          meal.title,
           overflow: TextOverflow.ellipsis,
         ),
         actions: [
           IconButton(
             onPressed: () => _toggleFavorite(
               provider,
-              widget.meal,
+              meal,
             ),
             icon: _getFavoriteIcon(
               provider,
-              widget.meal,
+              meal,
             ),
           ),
         ],
@@ -55,7 +60,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                   bottom: 15,
                 ),
                 child: MealImage(
-                  widget.meal,
+                  meal,
                 ),
               ),
             ),
@@ -63,12 +68,12 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
               "Ingredients",
               style: headingTextStyle,
             ),
-            _getIngredientsList(context),
+            _getIngredientsList(context, meal),
             const Text(
               "Steps",
               style: headingTextStyle,
             ),
-            _getStepsList(context)
+            _getStepsList(context, meal)
           ],
         ),
       ),
@@ -109,12 +114,12 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
         : const Icon(Icons.star_border_outlined);
   }
 
-  Widget _getStepsList(BuildContext context) {
-    return _getDetailsText(widget.meal.steps, context);
+  Widget _getStepsList(BuildContext context, Meal meal) {
+    return _getDetailsText(meal.steps, context);
   }
 
-  Widget _getIngredientsList(BuildContext context) {
-    return _getDetailsText(widget.meal.ingredients, context);
+  Widget _getIngredientsList(BuildContext context, Meal meal) {
+    return _getDetailsText(meal.ingredients, context);
   }
 
   void _toggleFavorite(MealFavoritesProvider provider, Meal meal) {

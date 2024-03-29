@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meal_app/models/meal.dart';
-import 'package:meal_app/screens/meal_details.dart';
 import 'package:meal_app/widgets/meal_item.dart';
 import '../screens/meal_empty.dart';
 
@@ -24,14 +24,14 @@ class _MealListState extends State<MealList> {
         ? ListView.builder(
             itemCount: widget.meals.length,
             itemBuilder: ((context, index) => GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MealDetailsScreen(
-                        widget.meals[index],
-                      ),
-                    ),
-                  ),
+                  onTap: () {
+                    var path = GoRouter.of(context)
+                        .routeInformationProvider
+                        .value
+                        .uri
+                        .path;
+                    context.go("$path/details/${widget.meals[index].id}");
+                  },
                   child: MealItem(
                     widget.meals[index],
                   ),

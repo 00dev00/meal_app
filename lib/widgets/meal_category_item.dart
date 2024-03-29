@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:meal_app/models/meal_category.dart';
-import 'package:meal_app/providers/meal_filters.dart';
-import 'package:meal_app/widgets/meal_list.dart';
-import 'package:meal_app/services/meal_service.dart';
-import 'package:provider/provider.dart';
 
 class MealCategoryItem extends StatelessWidget {
   const MealCategoryItem({
@@ -12,31 +9,10 @@ class MealCategoryItem extends StatelessWidget {
   });
   final MealCategory category;
 
-  void _selectCategory(BuildContext context) {
-    final filtersProvider = context.read<MealFiltersProvider>();
-    final mealService = MealService(filtersProvider);
-
-    var selectedMeals = mealService.getMealByCategory(category);
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: Text(category.title),
-          ),
-          body: MealList(
-            meals: selectedMeals,
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _selectCategory(context),
+      onTap: () => context.go("/meals_by_category/${category.id}"),
       splashColor: Theme.of(context).primaryColorDark,
       borderRadius: BorderRadius.circular(16),
       child: Container(
