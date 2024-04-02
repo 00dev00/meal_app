@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/providers/meal_filters.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meal_app/providers/meal_filters/meal_filters.dart';
 
-class MealFiltersScreen extends StatelessWidget {
+class MealFiltersScreen extends ConsumerStatefulWidget {
   const MealFiltersScreen({super.key});
 
   @override
+  ConsumerState<MealFiltersScreen> createState() => _MealFiltersScreenState();
+}
+
+class _MealFiltersScreenState extends ConsumerState<MealFiltersScreen> {
+  @override
   Widget build(BuildContext context) {
-    var provider = context.watch<MealFiltersProvider>();
+    final filtersExtendedDesc = ref.read(mealFiltersExtendedDescProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -16,10 +21,12 @@ class MealFiltersScreen extends StatelessWidget {
       body: ListView(
         children: [
           for (MapEntry<MealFilter, ({String name, String desc})> filterDesc
-              in provider.extendedDesc.entries)
+              in filtersExtendedDesc.entries)
             SwitchListTile.adaptive(
-              value: provider.getFilter(filterDesc.key),
-              onChanged: (value) => provider.changeFilter(filterDesc.key),
+              value: ref.watch(mealFiltersProvider)[filterDesc.key]!,
+              onChanged: (value) => ref
+                  .read(mealFiltersProvider.notifier)
+                  .changeFilter(filterDesc.key),
               title: Text(filterDesc.value.name),
               subtitle: Text(filterDesc.value.desc),
             )

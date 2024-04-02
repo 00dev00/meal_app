@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/models/meal/meal.dart';
 import 'package:meal_app/widgets/meal_item.dart';
 import '../screens/meal_empty.dart';
 
@@ -25,7 +25,7 @@ class _MealListState extends State<MealList> {
             itemCount: widget.meals.length,
             itemBuilder: ((context, index) => GestureDetector(
                   onTap: () {
-                    var path = GoRouter.of(context)
+                    final path = GoRouter.of(context)
                         .routeInformationProvider
                         .value
                         .uri

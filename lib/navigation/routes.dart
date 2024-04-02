@@ -43,7 +43,8 @@ final List<RouteBase> appRoutes = [
               parentNavigatorKey: _rootNavigatorKey,
               path: "meals_by_category/:category_id",
               builder: (context, state) {
-                var categoryId = state.pathParameters["category_id"] as String;
+                final categoryId =
+                    state.pathParameters["category_id"] as String;
                 return MealsByCategoryScreen(categoryId: categoryId);
               },
               routes: [mealDetails]),

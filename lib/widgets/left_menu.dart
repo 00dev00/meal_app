@@ -6,7 +6,7 @@ class LeftMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var itemTheme = Theme.of(context).textTheme.titleLarge!.copyWith(
+    final itemTheme = Theme.of(context).textTheme.titleLarge!.copyWith(
           color: Colors.white60,
         );
 

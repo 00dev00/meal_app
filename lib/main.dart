@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meal_app/navigation/routes.dart';
-import 'package:meal_app/providers/meal_favorites.dart';
-import 'package:meal_app/providers/meal_filters.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final ThemeData theme = ThemeData(
     useMaterial3: true,
@@ -14,7 +12,11 @@ final ThemeData theme = ThemeData(
     textTheme: GoogleFonts.latoTextTheme());
 
 void main() {
-  runApp(const MealApp());
+  runApp(
+    const ProviderScope(
+      child: MealApp(),
+    ),
+  );
 }
 
 class MealApp extends StatelessWidget {
@@ -22,21 +24,11 @@ class MealApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<MealFavoritesProvider>(
-          create: (context) => MealFavoritesProvider(),
-        ),
-        ChangeNotifierProvider<MealFiltersProvider>(
-          create: (context) => MealFiltersProvider(),
-        ),
-      ],
-      builder: (context, child) => MaterialApp.router(
-        routerConfig: appRouter,
-        debugShowCheckedModeBanner: false,
-        title: 'Meal App',
-        theme: theme,
-      ),
+    return MaterialApp.router(
+      routerConfig: appRouter,
+      debugShowCheckedModeBanner: false,
+      title: 'Meal App',
+      theme: theme,
     );
   }
 }

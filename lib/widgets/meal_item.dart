@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/models/meal/meal.dart';
 import 'package:meal_app/widgets/meal_image.dart';
 
 class MealItem extends StatefulWidget {
@@ -66,7 +66,7 @@ class _MealItemState extends State<MealItem> {
 }
 
 List<Widget> _getReceiptDetails(BuildContext context, Meal meal) {
-  var textStyle = Theme.of(context).textTheme.titleSmall!.copyWith(
+  final textStyle = Theme.of(context).textTheme.titleSmall!.copyWith(
         color: Colors.white70,
       );
 

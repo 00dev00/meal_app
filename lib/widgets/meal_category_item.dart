@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meal_app/models/meal_category.dart';
+import 'package:meal_app/models/meal_category/meal_category.dart';
 
 class MealCategoryItem extends StatelessWidget {
   const MealCategoryItem({

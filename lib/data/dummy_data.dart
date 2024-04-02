@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/meal_category.dart';
-import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/models/meal_category/meal_category.dart';
+import 'package:meal_app/models/meal/meal.dart';
 
 const availableCategories = [
   MealCategory(

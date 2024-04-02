@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/meal.dart';
-import 'package:meal_app/providers/meal_favorites.dart';
-import 'package:meal_app/providers/meal_filters.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meal_app/providers/meal/meal_main.dart';
+import 'package:meal_app/models/meal/meal.dart';
+import 'package:meal_app/providers/meal_favorites/meal_favorites.dart';
 import 'package:meal_app/services/meal_service.dart';
 import 'package:meal_app/widgets/meal_image.dart';
-import 'package:provider/provider.dart';
 
-class MealDetailsScreen extends StatefulWidget {
+class MealDetailsScreen extends ConsumerStatefulWidget {
   final String mealId;
 
   const MealDetailsScreen(
@@ -15,21 +15,26 @@ class MealDetailsScreen extends StatefulWidget {
   });
 
   @override
-  State<MealDetailsScreen> createState() => _MealDetailsScreenState();
+  ConsumerState<MealDetailsScreen> createState() => _MealDetailsScreenState();
 }
 
-class _MealDetailsScreenState extends State<MealDetailsScreen> {
+class _MealDetailsScreenState extends ConsumerState<MealDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    var filtersProvider = context.read<MealFiltersProvider>();
-    var meal = MealService(filtersProvider).getMeal(widget.mealId);
+    final meals = ref.watch(mealMainProvider);
+    final favorites = ref.watch(mealFavoritesProvider);
+    final mealService = MealService(
+      meals: meals,
+      favorites: favorites,
+    );
+    final meal = mealService.getMeal(widget.mealId);
+
+    final isFavorite = mealService.isFavoriteMeal(meal.id);
 
     const headingTextStyle = TextStyle(
       fontSize: 20,
       color: Colors.deepOrangeAccent,
     );
-
-    var provider = context.watch<MealFavoritesProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -39,14 +44,10 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () => _toggleFavorite(
-              provider,
-              meal,
-            ),
-            icon: _getFavoriteIcon(
-              provider,
-              meal,
-            ),
+            onPressed: () => _toggleFavorite(isFavorite, meal),
+            icon: isFavorite
+                ? const Icon(Icons.star)
+                : const Icon(Icons.star_border_outlined),
           ),
         ],
       ),
@@ -106,14 +107,6 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     );
   }
 
-  Icon _getFavoriteIcon(MealFavoritesProvider provider, Meal meal) {
-    var isFavorite = provider.isFavoriteMeal(meal);
-
-    return isFavorite
-        ? const Icon(Icons.star)
-        : const Icon(Icons.star_border_outlined);
-  }
-
   Widget _getStepsList(BuildContext context, Meal meal) {
     return _getDetailsText(meal.steps, context);
   }
@@ -122,15 +115,14 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     return _getDetailsText(meal.ingredients, context);
   }
 
-  void _toggleFavorite(MealFavoritesProvider provider, Meal meal) {
-    var isFavorite = provider.isFavoriteMeal(meal);
+  void _toggleFavorite(bool isFavorite, Meal meal) {
     SnackBar snackBar;
 
     if (isFavorite) {
-      provider.removeMeal(meal);
+      ref.read(mealFavoritesProvider.notifier).removeMeal(meal);
       snackBar = const SnackBar(content: Text("Removed from favorites"));
     } else {
-      provider.addMeal(meal);
+      ref.read(mealFavoritesProvider.notifier).addMeal(meal);
       snackBar = const SnackBar(content: Text("Marked as favorite"));
     }
 

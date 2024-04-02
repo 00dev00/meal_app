@@ -1,69 +1,77 @@
 import 'package:meal_app/data/dummy_data.dart';
-import 'package:meal_app/models/meal.dart';
-import 'package:meal_app/models/meal_category.dart';
-import 'package:meal_app/providers/meal_favorites.dart';
-import 'package:meal_app/providers/meal_filters.dart';
+import 'package:meal_app/models/meal/meal.dart';
+import 'package:meal_app/models/meal_category/meal_category.dart';
+import 'package:meal_app/providers/meal_filters/meal_filters.dart';
 
 class MealService {
-  final MealFiltersProvider filtersProvider;
-  final MealFavoritesProvider? favoritesProvider;
+  final List<Meal> meals;
+  final Map<MealFilter, bool> mealFilters;
+  final List<Meal> favorites;
 
-  MealService(this.filtersProvider, {this.favoritesProvider});
+  MealService({
+    this.meals = const [],
+    this.mealFilters = const {},
+    this.favorites = const [],
+  });
 
-  List<Meal> getMeals() {
-    var activeFilters = filtersProvider.getActiveFilters();
-
-    if (activeFilters.isEmpty) {
-      return dummyMeals;
-    }
-
-    return _applyActiveFilters(dummyMeals, activeFilters);
+  List<Meal> getFilteredMeals() {
+    return applyActiveFilters(meals);
   }
 
   Meal getMeal(String mealId) {
-    var meals = getMeals();
-
-    return meals.firstWhere((Meal meal) => meal.id == mealId);
+    return getFilteredMeals().firstWhere((Meal meal) => meal.id == mealId);
   }
 
   List<Meal> getMealsByCategory(String categoryId) {
-    var meals = getMeals();
-
-    return meals
+    return getFilteredMeals()
         .where((Meal meal) => meal.categories.contains(categoryId))
         .toList();
   }
 
-  List<Meal> getFavoriteMeal() {
-    if (favoritesProvider != null) {
-      var activeFilters = filtersProvider.getActiveFilters();
+  MealCategory getMealCategory(String categoryId) {
+    final allCategories = getMealCategories();
 
-      if (activeFilters.isEmpty) {
-        return favoritesProvider!.favoriteMeal;
-      }
-
-      return _applyActiveFilters(
-          favoritesProvider!.favoriteMeal, activeFilters);
-    }
-
-    return List.empty();
+    return allCategories
+        .firstWhere((MealCategory category) => category.id == categoryId);
   }
 
   List<MealCategory> getMealCategories() {
     return availableCategories;
   }
 
-  MealCategory getMealCategory(String categoryId) {
-    var allCategories = getMealCategories();
-
-    return allCategories
-        .firstWhere((MealCategory category) => category.id == categoryId);
+  //#region Favorites
+  bool isFavoriteMeal(String mealId) {
+    final favoriteMeals = getFavoriteMeals();
+    return favoriteMeals.any((meal) => meal.id == mealId);
   }
 
-  List<Meal> _applyActiveFilters(
+  List<Meal> getFavoriteMeals() {
+    List<MealFilter> activeFilters = getActiveFilters();
+    if (activeFilters.isEmpty) {
+      return favorites;
+    }
+
+    return applyActiveFilters(favorites);
+  }
+  //#endregion Favorites
+
+  //#region Filters
+  List<MealFilter> getActiveFilters() {
+    return mealFilters.entries
+        .where((filter) => filter.value)
+        .map((filter) => filter.key)
+        .toList();
+  }
+
+  List<Meal> applyActiveFilters(
     List<Meal> meals,
-    Iterable<MealFilter> activeFilters,
   ) {
+    final activeFilters = getActiveFilters();
+
+    if (activeFilters.isEmpty) {
+      return meals;
+    }
+
     return meals.where((Meal meal) {
       for (MealFilter mealFilter in activeFilters) {
         switch (mealFilter) {
@@ -80,4 +88,5 @@ class MealService {
       return true;
     }).toList();
   }
+  //#endregion Filters
 }
