@@ -45,9 +45,22 @@ class _MealDetailsScreenState extends ConsumerState<MealDetailsScreen> {
         actions: [
           IconButton(
             onPressed: () => _toggleFavorite(isFavorite, meal),
-            icon: isFavorite
-                ? const Icon(Icons.star)
-                : const Icon(Icons.star_border_outlined),
+            icon: AnimatedSwitcher(
+              duration: Durations.long1,
+              transitionBuilder: (child, animation) => ScaleTransition(
+                scale: animation,
+                child: child,
+              ),
+              child: isFavorite
+                  ? const Icon(
+                      Icons.star,
+                      key: ValueKey("favorite"),
+                    )
+                  : const Icon(
+                      Icons.star_border_outlined,
+                      key: ValueKey("not_favorite"),
+                    ),
+            ),
           ),
         ],
       ),
@@ -60,8 +73,11 @@ class _MealDetailsScreenState extends ConsumerState<MealDetailsScreen> {
                 padding: const EdgeInsets.only(
                   bottom: 15,
                 ),
-                child: MealImage(
-                  meal,
+                child: Hero(
+                  tag: meal.id,
+                  child: MealImage(
+                    meal,
+                  ),
                 ),
               ),
             ),

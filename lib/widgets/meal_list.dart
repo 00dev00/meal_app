@@ -32,8 +32,11 @@ class _MealListState extends State<MealList> {
                         .path;
                     context.go("$path/details/${widget.meals[index].id}");
                   },
-                  child: MealItem(
-                    widget.meals[index],
+                  child: Hero(
+                    tag: widget.meals[index].id,
+                    child: MealItem(
+                      widget.meals[index],
+                    ),
                   ),
                 )),
           )
